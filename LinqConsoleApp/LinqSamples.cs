@@ -306,8 +306,9 @@ namespace LinqConsoleApp
         /// </summary>
         public void Przyklad10()
         {
-            var res = Emps.Select(x => (x.Ename, x.Job, x.HireDate))
-                .Union(Emps.Select(x => (x.Ename = "Brak wartości", x.Job = null, x.HireDate = null)));
+            var res = Emps.Select(emp => new{emp.Ename, emp.Job, emp.HireDate})
+                .Union(new[] { new { Ename = "Brak wartości", Job = (string)null, HireDate = (DateTime?)null } });
+
             foreach (var r in res) Console.WriteLine(r);
         }
 
